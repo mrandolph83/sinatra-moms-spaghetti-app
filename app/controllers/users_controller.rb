@@ -14,13 +14,15 @@ class UsersController < ApplicationController
   post '/login' do 
   @user = User.find_by(username: params[:username])
     if @user.authenticate(params[:password])
-      binding.pry
+    session[:user_id] = @user.id
+    puts session
+    redirect "/users/#{@user.id}"
     else
     end
     redirect "/users"
   end
 
-  # GET: /users/5
+  # User SHOW Route
   get "/users/:id" do
     erb :"/users/show.html"
   end
