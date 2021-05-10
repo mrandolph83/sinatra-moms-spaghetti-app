@@ -10,9 +10,15 @@ class UsersController < ApplicationController
     erb :"/users/signup.html"
   end
 
-    # GET new user at /users/signup
+    # POST new user 
   post "/users/signed_in" do
-    binding.pry
+    if params[:name] != "" && params[:username] != "" && params[:password] != ""
+    @user = User.create(params)
+    redirect :"/users/#{@user.id}"
+    else
+      # FLASH MESSAGE ABOUT FILLING ALL INFO?!
+      erb :"/users/signup.html"
+    end
   end
 
   # POST login
@@ -29,6 +35,7 @@ class UsersController < ApplicationController
 
   # User SHOW Route
   get "/users/:id" do
+    @user = User.find_by(id: params[:id])
     erb :"/users/show.html"
   end
 
