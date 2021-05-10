@@ -5,9 +5,14 @@ class UsersController < ApplicationController
     erb :"/users/login.html"
   end
 
-  # GET: /users/new
-  get "/users/new" do
-    erb :"/users/new.html"
+  # GET new user at /users/signup
+  get "/users/signup" do
+    erb :"/users/signup.html"
+  end
+
+    # GET new user at /users/signup
+  post "/users/signed_in" do
+    binding.pry
   end
 
   # POST login
