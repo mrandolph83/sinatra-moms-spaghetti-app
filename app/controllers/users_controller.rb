@@ -6,19 +6,23 @@ class UsersController < ApplicationController
   end
 
   # GET new user at /users/signup
-  get "/users/signup" do
+  get "/signup" do
     erb :"/users/signup.html"
   end
 
     # POST new user 
-  post "/users/signed_in" do
+  post "/users" do
     if params[:name] != "" && params[:username] != "" && params[:password] != ""
     @user = User.create(params)
-    redirect :"/users/#{@user.id}"
-    else
-      # FLASH MESSAGE ABOUT FILLING ALL INFO?!
-      erb :"/users/signup.html"
-    end
+
+    end 
+    
+    if @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect "/users/#{@user.id}"
+      else
+        redirect "/signup"
+      end
   end
 
   # POST login
@@ -26,17 +30,23 @@ class UsersController < ApplicationController
   @user = User.find_by(username: params[:username])
     if @user.authenticate(params[:password])
     session[:user_id] = @user.id
-    puts session
     redirect "/users/#{@user.id}"
     else
+      redirect "/login"
     end
-    redirect "/users"
+   
   end
 
   # User SHOW Route
   get "/users/:id" do
     @user = User.find_by(id: params[:id])
+    
     erb :"/users/show.html"
+  end
+
+  get '/logout' do
+    session.clear
+    redirect '/'
   end
 
   # GET: /users/5/edit
