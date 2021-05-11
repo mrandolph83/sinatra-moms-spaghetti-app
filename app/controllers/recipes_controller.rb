@@ -12,11 +12,27 @@ class RecipesController < ApplicationController
 
   # POST: /recipes
   post "/recipes" do
-    redirect "/recipes"
+    # I only want to create if it has content
+    # I only want to save if it has content
+    # I also only want to create a recipe if a user is logged in
+    if !logged_in?
+      redirect '/'
+    end
+
+    if params[:content] != ""
+      # create a new recipe. also create a new category class, maybe
+      # gorup it with rating in a classify class
+      @recipe = Recipe.create(title: params[:title], content: params[:content], category: params[:category], simple_review: params[:simple_review], user_id: current_user.id)
+    
+      redirect "/recipes/#{@recipe.id}"
+
+    else
+    end
   end
 
-  # GET: /recipes/5
+  # GET: Recipe Show Page
   get "/recipes/:id" do
+    @recipe = Recipe.find_by(id: params[:id])
     erb :"/recipes/show.html"
   end
 
