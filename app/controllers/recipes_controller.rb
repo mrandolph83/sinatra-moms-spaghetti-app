@@ -25,6 +25,7 @@ class RecipesController < ApplicationController
       @recipe = Recipe.create(title: params[:title], content: params[:content], category: params[:category], simple_review: params[:simple_review], user_id: current_user.id)
     
       redirect "/recipes/#{@recipe.id}"
+      # Recirects destroy 
 
     else
     end
@@ -32,22 +33,35 @@ class RecipesController < ApplicationController
 
   # GET: Recipe Show Page
   get "/recipes/:id" do
-    @recipe = Recipe.find_by(id: params[:id])
+   set_recipe
+    # binding.pry
     erb :"/recipes/show.html"
   end
 
-  # GET: /recipes/5/edit
-  get "/recipes/:id/edit" do
+  # GET: Edit Recipe to edit.erb, so you can render an edit form with patch
+  get "/recipes/:id/edit" do 
+    set_recipe
     erb :"/recipes/edit.html"
   end
 
   # PATCH: /recipes/5
   patch "/recipes/:id" do
-    redirect "/recipes/:id"
+    set_recipe
+  # Find the recipe
+  # Update the recipe
+  # REdirect to show page
+    @recipe.update(title: params[:title], content: params[:content], category: params[:category], simple_review: params[:simple_review])
+    redirect "/recipes/#{@recipe.id}"
   end
 
   # DELETE: /recipes/5/delete
   delete "/recipes/:id/delete" do
     redirect "/recipes"
+  end
+
+  private
+
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
   end
 end

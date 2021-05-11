@@ -1,1 +1,32 @@
 <h1>Insert the form to edit an instance of your model here.</h1>
+ 
+
+<form class="" action="/recipes/<%= @recipe.id%>" method="post">
+<input type="hidden" name="_method" value="patch">
+<label for="title">Recipe Title:</label>
+<input type="text" name="title" value="<%= @recipe.title %>"><br>
+
+<label for="content">Recipe Instructions:</label>
+<textarea name="content" style="width:auto; height:auto;"><%= @recipe.content %> </textarea>
+
+<h3>Select the categories for your recipe:</h3>
+<label for="breakfast">Breakfast</label>
+<input type="checkbox" id="breakfast" name="category" value="<%= @recipe.category %>">
+
+
+<h3>How simple is your recipe?</h3>
+<label for="simple_review">1</label>
+<input type="radio" name="simple_review" value=1>
+<label for="simple_review">2</label>
+<input type="radio" name="simple_review" value=2>
+<label for="simple_review">3</label>
+<input type="radio" name="simple_review" value=3 checked>
+<label for="simple_review">4</label>
+<input type="radio" name="simple_review" value=4>
+<label for="simple_review">5</label>
+<input type="radio" name="simple_review" value=5><br><br>
+
+<input type="submit" name="" value="Edit Entry">
+
+
+</form>
