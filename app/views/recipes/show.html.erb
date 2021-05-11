@@ -1,6 +1,8 @@
 <h1>Here's how to make <%= @recipe.title %>  </h1>
 <p> <%= @recipe.content %> </p>
 
+<% if authorized_to_edit?(@recipe) %>
 <a href="/recipes/<%= @recipe.id %>/edit">Edit Link </a>
+<% end %>
 
-Delete
+
