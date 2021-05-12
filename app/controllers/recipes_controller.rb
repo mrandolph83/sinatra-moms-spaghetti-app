@@ -73,7 +73,14 @@ end
 
   # DELETE: /recipes/5/delete
   delete "/recipes/:id/delete" do
-    redirect "/recipes"
+    set_recipe
+    if @recipe.user == current_user
+      @recipe.destroy
+      redirect "/recipes"
+    else
+      redirect "/recipes"
+    end
+    
   end
 
   private
