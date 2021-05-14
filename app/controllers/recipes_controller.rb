@@ -57,7 +57,7 @@ class RecipesController < ApplicationController
   patch "/recipes/:id" do
     set_recipe
     if logged_in?
-      if @recipe.user == current_user
+      if @recipe.user == current_user && params[:content] != ""
   # Find the recipe
   # Update the recipe
   # REdirect to show page
