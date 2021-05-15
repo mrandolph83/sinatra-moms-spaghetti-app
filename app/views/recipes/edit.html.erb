@@ -1,13 +1,14 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<h1>Edit your recipe below:</h1>
  
 
 <form class="" action="/recipes/<%= @recipe.id%>" method="post">
 <input type="hidden" name="_method" value="patch">
-<label for="title">Recipe Title:</label>
-<input type="text" name="title" value="<%= @recipe.title %>"><br>
+<h3><label for="title">Recipe Title:</label></h3><br>
+<input type="text" name="title" value="<%= @recipe.title %>">
 
-<label for="content">Recipe Instructions:</label>
-<textarea name="content" style="width:auto; height:auto;"><%= @recipe.content %> </textarea>
+<h3><label for="content">Recipe Instructions:</label></h3>
+<textarea name="content" style="width:600px; height:400px; align: left;"> <%= @recipe.content %> </textarea>
+
 
 <h3>Select the categories for your recipe:</h3>
 <label for="breakfast">Breakfast</label>
