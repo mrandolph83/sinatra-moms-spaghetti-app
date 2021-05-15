@@ -1,5 +1,9 @@
 <h2>Hello Homechef! Enter your Login information below:</h2>
 
+<% if flash[:error] %>
+ <h3> <%= flash[:error] %> </h3>
+<% end %>
+
 <form class="" action="/login" method="post">
   <label for="username">Username: </label>
   <input type="text" name="username" value="">

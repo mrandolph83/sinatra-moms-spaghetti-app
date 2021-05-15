@@ -1,5 +1,8 @@
 <h1>Welcome <%= @user.name %>  </h1>
 <h3>My Recipes: </h3>
-<%@user.recipes.each do |recipe|%>
-<%= puts recipe.title %>
-    <%end%>
+<p> <%@user.recipes.each do |recipe| %>
+    <li><a href="/recipes/<%= recipe.id %>"><%= recipe.title%> </a> <li>
+    <% end %>
+
+</p>
+    

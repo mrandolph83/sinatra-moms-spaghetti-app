@@ -28,10 +28,14 @@ class UsersController < ApplicationController
   # POST login
   post '/login' do 
   @user = User.find_by(username: params[:username])
-    if @user.authenticate(params[:password])
+    if @user && @user.authenticate(params[:password])
+      # What does authenticate do EXACTLY?
     session[:user_id] = @user.id
+    # flash[:message] = "Welcome, #{@user.name}!"
     redirect "/users/#{@user.id}"
     else
+      # binding.pry
+      flash[:error] = "Your credentials were invalid.  Please sign up or try again."
       redirect "/login"
     end
    

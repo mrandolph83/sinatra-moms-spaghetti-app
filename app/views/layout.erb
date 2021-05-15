@@ -21,6 +21,9 @@
     <a href="/recipes/new">Post a Recipe</a>
     <% end %>
     </div>
+    <% if flash[:message] %>
+  <h3> <%= flash[:message] %> </h3>
+  <% end %>
     <div class="wrapper">
 
         <%= yield %>

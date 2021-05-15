@@ -24,11 +24,12 @@ class RecipesController < ApplicationController
       # create a new recipe. also create a new category class, maybe
       # gorup it with rating in a classify class
       @recipe = Recipe.create(title: params[:title], content: params[:content], category: params[:category], simple_review: params[:simple_review], user_id: current_user.id)
-    
+      flash[:message] = "Thanks for adding to our recipe community!"
       redirect "/recipes/#{@recipe.id}"
       # Recirects destroy 
-
     else
+      flash[:message] = "Information is missing. Please fill out your recipe information below."
+      redirect '/recipes/new'
     end
   end
 
