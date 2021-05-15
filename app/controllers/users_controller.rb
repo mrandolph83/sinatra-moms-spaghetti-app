@@ -12,15 +12,12 @@ class UsersController < ApplicationController
 
     # POST new user 
   post "/users" do
-    if params[:name] != "" && params[:username] != "" && params[:password] != ""
-    @user = User.create(params)
-
-    end 
-    
-    if @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      redirect "/users/#{@user.id}"
+    @user = User.new(params)
+    if @user.save
+    session[:user_id] = @user.id
+    redirect "/users/#{@user.id}"
       else
+      flash[:errors] = "New account is invalid: #{@user.errors.full_messages.to_sentence}"
         redirect "/signup"
       end
   end

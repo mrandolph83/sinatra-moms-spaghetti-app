@@ -10,5 +10,6 @@ ActiveRecord::Base.establish_connection(
 
 require './app/controllers/application_controller'
 require_all 'app'
+# Check if below 2 require files are necessary
 require 'sinatra/base'
 require 'sinatra/flash'
