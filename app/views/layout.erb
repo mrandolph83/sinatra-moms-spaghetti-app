@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
+
     <div class="nav">
     <% if logged_in? %> 
     <a href="/logout">Logout</a>
@@ -21,12 +22,14 @@
     <a href="/recipes/new">Post a Recipe</a>
     <% end %>
     </div>
+
     <% if flash[:message] %>
-  <h3> <%= flash[:message] %> </h3>
+  <h4> <%= flash[:message] %> </h4>
   <% end %>
-  <% if flash[:error] %>
-  <h3 style="color: red;"> <%= flash[:error] %> </h3>
+  <% if flash[:errors] %>
+  <h4 style="color: red;"> <%= flash[:errors] %> </h4>
   <% end %>
+
     <div class="wrapper">
 
         <%= yield %>

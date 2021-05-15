@@ -29,8 +29,11 @@ class ApplicationController < Sinatra::Base
       @current_user ||= User.find_by(id: session[:user_id])
     end
 
-    def authorized_to_edit?(recipe)
-      @recipe.user == current_user
+    def redirect_if_not_logged_in
+      if !logged_in?
+        flash[:errors] = "New account is invalid: #{@user.errors.full_messages.to_sentence}"
+        redirect '/' 
+      end
     end
   end
 

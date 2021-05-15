@@ -17,6 +17,7 @@ class RecipesController < ApplicationController
     # I only want to save if it has content
     # I also only want to create a recipe if a user is logged in
     if !logged_in?
+      flash[:errors] = "You must login or sign up to perform this action."
       redirect '/'
     end
 
@@ -28,7 +29,7 @@ class RecipesController < ApplicationController
       redirect "/recipes/#{@recipe.id}"
       # Recirects destroy 
     else
-      flash[:message] = "Information is missing. Please fill out your recipe information below."
+      flash[:message] = "Please enter your recipe information below."
       redirect '/recipes/new'
     end
   end
@@ -50,6 +51,7 @@ class RecipesController < ApplicationController
       redirect "users/#{current_user.id}"
     end
   else
+    flash[:errors] = "You must login or sign up to perform this action."
     redirect "/"
     end
   end
@@ -68,6 +70,7 @@ class RecipesController < ApplicationController
         redirect "users/#{current_user.id}"
   end
   else
+    flash[:errors] = "You must login or sign up to perform this action."
   redirect "/"
   end
 end
